@@ -40,6 +40,12 @@ abstract class RubiksCube{
             break;
           }
         }
+          if (wrongPos){
+            break;
+        }
+        if (wrongPos){
+          break;
+        }
       }
     }
     solved = !wrongPos;
@@ -49,7 +55,15 @@ abstract class RubiksCube{
   public abstract void turnCol(char input);
   public abstract void turnFace(char input);
   public abstract void turn(char input);
-  public abstract void scramble();
   
-  
+  public void scramble(){
+    char[] moveSet = {'r', 'u', 'f', 'l', 'd', 'b', 'R', 'U', 'F', 'L', 'D', 'B'};
+    char turntype;
+    int turnNum = 10 + (int) (Math.random() * 11);
+    for (int i = 0; i < turnNum; i++){
+      turntype = moveSet[(int)(Math.random() * moveSet.length)];
+      this.turn(turntype);
+    }
   }
+}
+  
