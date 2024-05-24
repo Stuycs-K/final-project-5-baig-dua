@@ -11,4 +11,4 @@ void mouseClicked() {
 
 void draw(){}
 
-void
+void drawCube(){}
