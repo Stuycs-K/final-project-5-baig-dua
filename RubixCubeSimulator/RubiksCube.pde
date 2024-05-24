@@ -15,7 +15,7 @@ abstract class RubiksCube{
     cube = new int[cubeColors.length][size][size];
     for (int i = 0; i < cube.length; i++){
       for (int j = 0; j < cube[i].length; j++){
-        for(int k = 0; k < cube[i][k].length; k++){
+        for(int k = 0; k < cube[i][j].length; k++){
           cube[i][j][k] = cubeColors[i];
         }
       }
