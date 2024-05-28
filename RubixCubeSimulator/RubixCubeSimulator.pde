@@ -1,3 +1,4 @@
+import java.util.Arrays;
 static int twoByTwo = 0;
 static int threeByThree = 1;
 static int MODE = twoByTwo;
@@ -7,7 +8,10 @@ Cube3x3 threeCube;
 void setup(){
   twoCube = new Cube2x2();
   threeCube = new Cube3x3();
-  drawCube(twoCube);
+  int[] newCol = {1, 2};
+  System.out.print(twoCube.debugToString());
+  twoCube.checkIfSolved();
+  System.out.println(twoCube.getSolved());
 }
 
 void mouseClicked() {

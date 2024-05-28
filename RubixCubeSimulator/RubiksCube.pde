@@ -1,3 +1,4 @@
+import java.util.Arrays;
 abstract class RubiksCube {
   private int[][][] cube;
   private boolean solved;
@@ -50,7 +51,7 @@ abstract class RubiksCube {
     boolean wrongPos = false;
     for (int i = 0; i < cube.length; i++) {
       for (int j = 0; j < cube[i].length; j++) {
-        for (int k = 0; k < cube[i][k].length; k++) {
+        for (int k = 0; k < cube[i][j].length; k++) {
           if (cube[i][j][k] != cubeColors[i]) {
             wrongPos = true;
             break;
@@ -81,8 +82,28 @@ abstract class RubiksCube {
     cube[face][row] = newRow;
     return ogRow;
   }
-
-  public abstract void turnRow(char input);
+  
+  public String debugToString(){
+    String cubeStr = "";
+    for (int i = 0; i < cube.length; i++) {
+      for (int j = 0; j < cube[i].length; j++) {
+        cubeStr += Arrays.toString(cube[i][j]) + "\n";
+      }  
+      cubeStr += "\n";
+    }
+    return cubeStr;
+}
+  public void turnRow(char input){
+    int[] temp = new int[cube[0].length];
+    int swapIndex = 1;
+    if (input == 'u'){
+      for (int i = index; i < cube.length - 1; i++){ 
+        swapIndex = swapIndex % (cube.length - 2) + 1;
+      }
+    }
+    else if (input == 'd'){
+    }
+  }
   public abstract void turnCol(char input);
   public abstract void turnFace(char input);
   public abstract void turn(char input);
