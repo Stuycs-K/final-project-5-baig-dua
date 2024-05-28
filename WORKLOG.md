@@ -10,6 +10,9 @@
 
 - I wrote the skeleton of classes Cube2x2 and Cube 3x3. I also wrote the scramble method both cubes will use.
 
+## 5/24/2024 - 5/27/2024
+- I wrote helper methods for the turn methods of the cubes, also worked on setup().
+
 
 ## GROUP MEMBER 2
 
