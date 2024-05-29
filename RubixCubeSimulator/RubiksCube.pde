@@ -94,6 +94,16 @@ abstract class RubiksCube {
     return cubeStr;
   }
   
+  public void reset(){
+    for (int i = 0; i < cube.length; i++) {
+      for (int j = 0; j < cube[i].length; j++) {
+        for (int k = 0; k < cube[i][j].length; k++) {
+          cube[i][j][k] = cubeColors[i];
+        }
+      }
+    }
+  }
+  
   public void turnRow(int row, boolean clockwise){
     int[] tempRow;
     int swapIndex;

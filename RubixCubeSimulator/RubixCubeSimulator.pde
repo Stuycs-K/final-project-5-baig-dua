@@ -10,7 +10,7 @@ void setup(){
   twoCube = new Cube2x2();
   threeCube = new Cube3x3();
   int[] newCol = {1, 2};
-  twoCube
+  twoCube.turnRow(0, true);
   drawCube(twoCube, 2, 200, width/2, height/2);
 }
 
