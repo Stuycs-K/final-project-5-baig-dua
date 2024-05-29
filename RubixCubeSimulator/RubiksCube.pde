@@ -97,13 +97,19 @@ abstract class RubiksCube {
     int[] temp = new int[cube[0].length];
     int swapIndex = 1;
     if (input == 'u'){
-      for (int i = index; i < cube.length - 1; i++){ 
+      for (int i = 1; i < cube.length - 1; i++){ 
         swapIndex = swapIndex % (cube.length - 2) + 1;
-      }
+        temp = replaceRow(swapIndex, 0, this.getRows(i, 0));
+     }
     }
-    else if (input == 'd'){
+    if (input == 'd'){
+      for (int i = 1; i < cube.length - 1; i++){ 
+        swapIndex = swapIndex % (cube.length - 2) + 1;
+        temp = replaceRow(swapIndex, 0, this.getRows(i, 0));
+     }
     }
   }
+  
   public abstract void turnCol(char input);
   public abstract void turnFace(char input);
   public abstract void turn(char input);

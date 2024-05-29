@@ -14,7 +14,8 @@
 - I wrote helper methods for the turn methods of the cubes, also worked on setup().
 
 
-## GROUP MEMBER 2
+## 5/28/2024
+- Started work on turn method for cube.
 
 ### date x
 

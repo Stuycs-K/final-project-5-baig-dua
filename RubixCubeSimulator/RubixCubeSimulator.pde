@@ -10,8 +10,8 @@ void setup(){
   threeCube = new Cube3x3();
   int[] newCol = {1, 2};
   System.out.print(twoCube.debugToString());
-  twoCube.checkIfSolved();
-  System.out.println(twoCube.getSolved());
+  twoCube.turnRow('u');
+  System.out.print(twoCube.debugToString());
 }
 
 void mouseClicked() {
