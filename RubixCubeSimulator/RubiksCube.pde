@@ -92,13 +92,14 @@ abstract class RubiksCube {
       cubeStr += "\n";
     }
     return cubeStr;
-}
+  }
+  
   public void turnRow(char input){
     int[] temp = new int[cube[0].length];
     int swapIndex = 1;
     if (input == 'u'){
       for (int i = 1; i < cube.length - 1; i++){ 
-        swapIndex = swapIndex % (cube.length - 2) + 1;
+        swapIndex++;
         temp = replaceRow(swapIndex, 0, this.getRows(i, 0));
      }
     }
