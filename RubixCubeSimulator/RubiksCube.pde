@@ -100,7 +100,8 @@ abstract class RubiksCube {
     if (input == 'u'){
       for (int i = 1; i < cube.length - 1; i++){ 
         swapIndex++;
-        temp = replaceRow(swapIndex, 0, this.getRows(i, 0));
+        temp = this.getRows(i, 0);
+        replaceRow(swapIndex, 0, this.getRows(i, 0));
      }
     }
     if (input == 'd'){
