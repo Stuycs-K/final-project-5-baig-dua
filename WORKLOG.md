@@ -15,7 +15,10 @@
 
 
 ## 5/28/2024
-- Started work on turn method for cube.
+- I started work on turn methods for cube (turnRow).
+
+## 5/29/2024
+- I added methods to draw the cubes for the simulation (methods drawCubeFace and drawCubes).
 
 ### date x
 
