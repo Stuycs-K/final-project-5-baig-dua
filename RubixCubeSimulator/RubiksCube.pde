@@ -147,11 +147,17 @@ abstract class RubiksCube {
   
   public void turnFace(int face, boolean clockwise){
     int[][] faceCols = new int[cube[face].length][cube[face].length];
-    for (int i = 0; i < cube[face].length; i++){
-      faceCols[i] = this.getCols(face, i);
-      
-    }
     if (clockwise){
+      for (int i = 0; i < cube[face].length; i++){
+        faceCols[i] = this.reverseCol(face, i);
+      }
+      for (int i = 0; i < faceCols.length; i++){
+        this.replaceRow(face, i, faceCols[i]);
+      }
+    }
+    else {
+      for (int i = 0; i < cube[face].length; i++){
+        faceCols[i] = this.
     }
   }
   public abstract void turn(char input);
