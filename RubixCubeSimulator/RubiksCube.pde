@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*; 
 abstract class RubiksCube {
   private int[][][] cube;
   private boolean solved;
@@ -77,6 +77,15 @@ abstract class RubiksCube {
     return ogCol;
   }
   
+  private int[] reverseCol(int face, int col){
+    int[] reverseArr = new int [cube[face].length];
+    int[] currCol = this.getCols(face, col);
+    for (int i = 0; i < currCol.length; i++){
+      reverseArr[i] = currCol[(currCol.length - 1) - i];
+    }
+    return reverseArr;
+  }
+  
   private int[] replaceRow(int face, int row, int[] newRow){
     int[] ogRow = cube[face][row].clone();
     cube[face][row] = newRow;
@@ -103,6 +112,7 @@ abstract class RubiksCube {
       }
     }
   }
+  
   
   public void turnRow(int row, boolean clockwise){
     int[] tempRow;
@@ -139,6 +149,7 @@ abstract class RubiksCube {
     int[][] faceCols = new int[cube[face].length][cube[face].length];
     for (int i = 0; i < cube[face].length; i++){
       faceCols[i] = this.getCols(face, i);
+      
     }
     if (clockwise){
     }
