@@ -11,33 +11,51 @@ void setup(){
   threeCube = new Cube3x3();
   int[] newCol = {1, 2};
   twoCube.turnRow(0, true);
-  drawCube(twoCube, 2, 200, width/2, height/2);
+  drawCube(threeCube, 3, 200, width/2, height/2);
 }
 
 void mouseClicked() {
+  if (MODE == twoByTwo){
+    twoCube.reset();
+  } 
+  if (MODE == threeByThree){
+    threeCube.reset();
+  }
 }
 
 void draw(){
-
+  background(211, 211, 211);
+  drawCube(threeCube, 3, 200, width/2, height/2);
 }
 
-void drawCubeFace(RubiksCube cube, int cubeRowLength, int face, float faceSize, float xcoord, float ycoord){
+void drawCubeFace(RubiksCube cube, int cubeRowLength, int face, float faceSize, float xcoord, float ycoord, float position){
   float squareLength = faceSize/cubeRowLength;
-  for (int i = 0; i < cubeRowLength; i++){
-    for(int j = 0; j < cubeRowLength; j++){
-      fill(cube.getColor(face, i, j));
-      square(xcoord + (squareLength * i), ycoord + (j * squareLength), squareLength);
-    }
+  for (int row = 0; row < cubeRowLength; row++){
+    for(int col = 0; col < cubeRowLength; col++){
+      fill(cube.getColor(face, row, col));
+      if (position == 0){
+        square(xcoord + (squareLength * col), ycoord + (row * squareLength), squareLength);
+      }
+      else if (position == 1){
+        square(xcoord - (squareLength * row), ycoord + (col * squareLength), squareLength);
+      }
+      else if (position == 2){
+        square(xcoord + (squareLength * col), ycoord - (row * squareLength), squareLength);
+      }
+      else if (position == 3){
+        square(xcoord + (squareLength * row), ycoord + (col * squareLength), squareLength);
+      }
   }
+}
 }
 
 void drawCube(RubiksCube cube, int cubeRowLength, float faceSize, float xcoord, float ycoord){
   xcoord -= faceSize;
   ycoord -= faceSize/2;
-  drawCubeFace(cube, cubeRowLength, 0, faceSize, xcoord, ycoord);
-  drawCubeFace(cube, cubeRowLength, 1, faceSize, xcoord  - faceSize, ycoord);
-  drawCubeFace(cube, cubeRowLength, 2, faceSize, xcoord, ycoord + faceSize);
-  drawCubeFace(cube, cubeRowLength, 3, faceSize, xcoord + faceSize, ycoord);
-  drawCubeFace(cube, cubeRowLength, 4, faceSize, xcoord, ycoord - faceSize);
-  drawCubeFace(cube, cubeRowLength, 5, faceSize, xcoord + (faceSize * 2), ycoord);
+  drawCubeFace(cube, cubeRowLength, 0, faceSize, xcoord, ycoord, 0);
+  drawCubeFace(cube, cubeRowLength, 1, faceSize, xcoord  - faceSize/cubeRowLength, ycoord, 1);
+  drawCubeFace(cube, cubeRowLength, 2, faceSize, xcoord, ycoord - faceSize/cubeRowLength, 2);
+  drawCubeFace(cube, cubeRowLength, 3, faceSize, xcoord + faceSize, ycoord, 3);
+  drawCubeFace(cube, cubeRowLength, 4, faceSize, xcoord, ycoord + faceSize, 0);
+  drawCubeFace(cube, cubeRowLength, 5, faceSize, xcoord + (faceSize * 2), ycoord, 3);
 }
