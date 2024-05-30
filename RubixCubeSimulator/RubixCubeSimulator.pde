@@ -10,8 +10,8 @@ void setup(){
   twoCube = new Cube2x2();
   threeCube = new Cube3x3();
   int[] newCol = {1, 2};
-  twoCube.turnRow(0, true);
-  drawCube(threeCube, 3, 200, width/2, height/2);
+  twoCube.turnRow(0, false);
+  drawCube(twoCube, 2, 200, width/2, height/2);
 }
 
 void mouseClicked() {
@@ -25,7 +25,7 @@ void mouseClicked() {
 
 void draw(){
   background(211, 211, 211);
-  drawCube(threeCube, 3, 200, width/2, height/2);
+  drawCube(twoCube, 2, 200, width/2, height/2);
 }
 
 void drawCubeFace(RubiksCube cube, int cubeRowLength, int face, float faceSize, float xcoord, float ycoord, float position){

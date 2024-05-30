@@ -109,15 +109,26 @@ abstract class RubiksCube {
     int swapIndex;
     if (clockwise){
       swapIndex = 1;
-      tempRow = getRows(1, 0);
+      tempRow = getRows(1, row);
       for (int i = 1; i < cube.length - 1; i++){ 
-        swapIndex = (swapIndex % 4) + 1;
-        tempRow = replaceRow(swapIndex, 0, tempRow);
+        swapIndex++;
+        if (swapIndex >= cube.length - 1){
+          swapIndex = 1;
+        }
+        tempRow = replaceRow(swapIndex, row, tempRow);
      }
     }
     else {
       swapIndex = 4;
-      tempRow = getRows(1, 0);
+      tempRow = getRows(4, 0);
+      for (int i = 4; i > 0; i--){
+        swapIndex--;
+        if (swapIndex <= 0){
+          swapIndex = 4;
+        }
+        System.out.println(Arrays.toString(tempRow));
+        tempRow = replaceRow(swapIndex, row, tempRow);
+      }
     }
   }
   
