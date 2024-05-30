@@ -132,8 +132,17 @@ abstract class RubiksCube {
     }
   }
   
-  public abstract void turnCol(char input);
-  public abstract void turnFace(char input);
+  public void turnCol(int col, boolean clockwise){
+  }
+  
+  public void turnFace(int face, boolean clockwise){
+    int[][] faceCols = new int[cube[face].length][cube[face].length];
+    for (int i = 0; i < cube[face].length; i++){
+      faceCols[i] = this.getCols(face, i);
+    }
+    if (clockwise){
+    }
+  }
   public abstract void turn(char input);
   
   public void scramble() {

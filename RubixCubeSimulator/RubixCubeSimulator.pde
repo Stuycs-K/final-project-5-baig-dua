@@ -10,7 +10,9 @@ void setup(){
   twoCube = new Cube2x2();
   threeCube = new Cube3x3();
   int[] newCol = {1, 2};
-  twoCube.turnRow(0, false);
+  twoCube.turnRow(0, true);
+  System.out.println(twoCube.debugToString());
+  twoCube.turnFace(1, true);
   drawCube(twoCube, 2, 200, width/2, height/2);
 }
 
@@ -28,7 +30,7 @@ void draw(){
   drawCube(twoCube, 2, 200, width/2, height/2);
 }
 
-void drawCubeFace(RubiksCube cube, int cubeRowLength, int face, float faceSize, float xcoord, float ycoord, float position){
+void drawFace(RubiksCube cube, int cubeRowLength, int face, float faceSize, float xcoord, float ycoord, int position){
   float squareLength = faceSize/cubeRowLength;
   for (int row = 0; row < cubeRowLength; row++){
     for(int col = 0; col < cubeRowLength; col++){
@@ -52,10 +54,10 @@ void drawCubeFace(RubiksCube cube, int cubeRowLength, int face, float faceSize, 
 void drawCube(RubiksCube cube, int cubeRowLength, float faceSize, float xcoord, float ycoord){
   xcoord -= faceSize;
   ycoord -= faceSize/2;
-  drawCubeFace(cube, cubeRowLength, 0, faceSize, xcoord, ycoord, 0);
-  drawCubeFace(cube, cubeRowLength, 1, faceSize, xcoord  - faceSize/cubeRowLength, ycoord, 1);
-  drawCubeFace(cube, cubeRowLength, 2, faceSize, xcoord, ycoord - faceSize/cubeRowLength, 2);
-  drawCubeFace(cube, cubeRowLength, 3, faceSize, xcoord + faceSize, ycoord, 3);
-  drawCubeFace(cube, cubeRowLength, 4, faceSize, xcoord, ycoord + faceSize, 0);
-  drawCubeFace(cube, cubeRowLength, 5, faceSize, xcoord + (faceSize * 2), ycoord, 3);
+  drawFace(cube, cubeRowLength, 0, faceSize, xcoord, ycoord, 0);
+  drawFace(cube, cubeRowLength, 1, faceSize, xcoord  - faceSize/cubeRowLength, ycoord, 1);
+  drawFace(cube, cubeRowLength, 2, faceSize, xcoord, ycoord - faceSize/cubeRowLength, 2);
+  drawFace(cube, cubeRowLength, 3, faceSize, xcoord + faceSize, ycoord, 3);
+  drawFace(cube, cubeRowLength, 4, faceSize, xcoord, ycoord + faceSize, 0);
+  drawFace(cube, cubeRowLength, 5, faceSize, xcoord + (faceSize * 2), ycoord, 3);
 }
