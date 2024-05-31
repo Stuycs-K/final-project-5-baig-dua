@@ -138,11 +138,12 @@ abstract class RubiksCube {
         if (swapIndex <= 0){
           swapIndex = 4;
         }
-        System.out.println(Arrays.toString(tempRow));
+        //System.out.println(Arrays.toString(tempRow));
         tempRow = replaceRow(swapIndex, row, tempRow);
       }
     }
   }
+
 
   public void turnCol(int col, boolean clockwise, boolean front){
     int[] tempCol;
@@ -156,13 +157,15 @@ abstract class RubiksCube {
     if (clockwise){
       tempCol = getCols(colIndex[colIndex.length - 1], col);
       for (int i = colIndex.length - 1; i >= 0; i--){
+         if (i - 1 <= 0){
          
       }
     }
     else {
     }
   }
-  
+
+
   public void turnFace(int face, boolean clockwise){
     int[][] faceCols = new int[cube[face].length][cube[face].length];
     if (clockwise){
