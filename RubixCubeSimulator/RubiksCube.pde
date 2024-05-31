@@ -157,8 +157,12 @@ abstract class RubiksCube {
     }
     else {
       for (int i = 0; i < cube[face].length; i++){
-        faceCols[i] = this.
-    }
+        faceCols[i] = this.getCols(face, i);
+      }
+      for (int i = cube[face].length - 1; i >= 0; i--){
+          this.replaceRow(face, i, faceCols[(faceCols.length - 1) - i]);
+      }
+   }
   }
   public abstract void turn(char input);
   

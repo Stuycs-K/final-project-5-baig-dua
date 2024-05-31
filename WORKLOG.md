@@ -20,9 +20,9 @@
 ## 5/29/2024
 - I added methods to draw the cubes for the simulation (methods drawCubeFace and drawCubes).
 
-### date x
+### 5/30/3024
 
-info
+- Completed methods turnFace and turnRow, only turnCol left for cube movement.
 
 ### date y
 
