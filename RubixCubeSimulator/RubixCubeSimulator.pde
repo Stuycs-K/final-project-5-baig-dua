@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 static int twoByTwo = 0;
 static int threeByThree = 1;
 static int MODE = twoByTwo;
@@ -12,6 +12,7 @@ void setup(){
   int[] newCol = {1, 2};
   twoCube.turnRow(0, true);
   System.out.println(twoCube.debugToString());
+  twoCube.turnFace(1, false);
   twoCube.turnFace(1, true);
   drawCube(twoCube, 2, 200, width/2, height/2);
 }

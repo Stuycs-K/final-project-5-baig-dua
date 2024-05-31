@@ -49,10 +49,12 @@ abstract class RubiksCube {
 
   public void checkIfSolved() {
     boolean wrongPos = false;
+    int firstColor;
     for (int i = 0; i < cube.length; i++) {
+      firstColor = cube[i][0][0];
       for (int j = 0; j < cube[i].length; j++) {
         for (int k = 0; k < cube[i][j].length; k++) {
-          if (cube[i][j][k] != cubeColors[i]) {
+          if (cube[i][j][k] != firstColor) {
             wrongPos = true;
             break;
           }
@@ -141,8 +143,24 @@ abstract class RubiksCube {
       }
     }
   }
-  
-  public void turnCol(int col, boolean clockwise){
+
+  public void turnCol(int col, boolean clockwise, boolean front){
+    int[] tempCol;
+    int[] colIndex;
+    if (front){
+      colIndex = new int[]{0, 2, 5, 4};
+    }
+    else {
+      colIndex = new int[]{0, 1, 5, 3};
+    }
+    if (clockwise){
+      tempCol = getCols(colIndex[colIndex.length - 1], col);
+      for (int i = colIndex.length - 1; i >= 0; i--){
+         
+      }
+    }
+    else {
+    }
   }
   
   public void turnFace(int face, boolean clockwise){
@@ -164,6 +182,7 @@ abstract class RubiksCube {
       }
    }
   }
+  
   public abstract void turn(char input);
   
   public void scramble() {
