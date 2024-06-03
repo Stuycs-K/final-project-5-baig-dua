@@ -20,10 +20,11 @@
 ## 5/29/2024
 - I added methods to draw the cubes for the simulation (methods drawCubeFace and drawCubes).
 
-### 5/30/3024
+### 5/30/2024
 
 - Completed methods turnFace and turnRow, only turnCol left for cube movement.
 
-### date y
+### 5/31/2024 - 6/2/2024
+- Completed methods for turning the side and front columns. Also wrote overarching turnmethod and added keyPressed for input.
 
 info
