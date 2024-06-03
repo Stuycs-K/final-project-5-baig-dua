@@ -126,7 +126,7 @@ abstract class RubiksCube {
         if (swapIndex >= cube.length - 1){
           swapIndex = 1;
         }
-        if (swapIndex == 1 || swapIndex == 3) {
+        if (swapIndex == 2 || swapIndex == 4) {
           tempRow = this.reverseCol(tempRow);
         }
         tempRow = replaceRow(swapIndex, row, tempRow);
@@ -140,7 +140,7 @@ abstract class RubiksCube {
         if (swapIndex <= 0){
           swapIndex = 4;
         }
-        if (swapIndex == 2 || swapIndex == 4) {
+        if (swapIndex == 1 || swapIndex == 3) {
           tempRow = this.reverseCol(tempRow);
         }
         //System.out.println(Arrays.toString(tempRow));
@@ -253,7 +253,7 @@ abstract class RubiksCube {
     }
     if (input == 'r' || input == 'R'){
       this.turnFrontCol(cube[0].length - 1, clockwise);
-      this.turnFace(3, clockwise);
+      this.turnFace(3, !clockwise);
     }
     else if (input == 'l' || input == 'L'){
       this.turnFrontCol(0, clockwise);
