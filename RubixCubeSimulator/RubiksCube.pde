@@ -126,6 +126,9 @@ abstract class RubiksCube {
         if (swapIndex >= cube.length - 1){
           swapIndex = 1;
         }
+        if (swapIndex == 4 || swapIndex == 2) {
+          tempRow = this.reverseCol(tempRow);
+        }
         tempRow = replaceRow(swapIndex, row, tempRow);
      }
     }
@@ -137,6 +140,9 @@ abstract class RubiksCube {
         if (swapIndex <= 0){
           swapIndex = 4;
         }
+        if (swapIndex == 1 || swapIndex == 3) {
+          tempRow = this.reverseCol(tempRow);
+        }
         //System.out.println(Arrays.toString(tempRow));
         tempRow = replaceRow(swapIndex, row, tempRow);
       }
@@ -146,14 +152,14 @@ abstract class RubiksCube {
 
   public void turnFrontCol(int col, boolean clockwise){
     int[] tempCol;
-    int[] colIndex = new int[]{2, 0, 4, 5};
+    int[] colIndex = new int[]{4, 0, 2, 5};
     int swapIndex;
     if (clockwise){
       swapIndex = colIndex[0];
       tempCol = this.getCols(swapIndex, col);
       for (int i = 0; i < colIndex.length; i++){
           swapIndex = colIndex[(i+1) % 4];
-        if (swapIndex == 0 || swapIndex == 5){
+        if (swapIndex == 2 || swapIndex == 4){
           tempCol = this.reverseCol(tempCol);
         }
         tempCol = this.replaceCol(swapIndex, col, tempCol);
@@ -169,7 +175,7 @@ abstract class RubiksCube {
         else {
           swapIndex = colIndex[i - 1];
         }
-        if (swapIndex == 2 || swapIndex == 4){
+        if (swapIndex == 0 || swapIndex == 5){
           tempCol = this.reverseCol(tempCol);
         }
         tempCol = this.replaceCol(swapIndex, col, tempCol);
@@ -236,14 +242,50 @@ abstract class RubiksCube {
    }
   }
   
-  public abstract void turn(char input);
+  public void turn(char input){
+    boolean clockwise;
+    System.out.println("turn");
+    if (input > 'Z'){
+      clockwise = true;
+    }
+    else{
+      clockwise = false;
+    }
+    if (input == 'r' || input == 'R'){
+      this.turnFrontCol(cube[0].length - 1, clockwise);
+      this.turnFace(3, clockwise);
+    }
+    else if (input == 'l' || input == 'L'){
+      this.turnFrontCol(0, clockwise);
+      this.turnFace(1, clockwise);
+    }
+    else if (input == 'u' || input == 'U'){
+      this.turnRow(0, clockwise);
+      this.turnFace(0, clockwise);
+    }
+    else if (input == 'd' || input == 'D'){
+      this.turnRow(cube[0].length - 1, clockwise);
+      this.turnFace(5, clockwise);
+    }
+    else if (input == 'f' || input == 'F'){
+      this.turnFace(4, clockwise);
+      this.turnSideCol(cube[0].length - 1, clockwise);
+    }
+    else if (input == 'b' || input == 'B'){
+      this.turnFace(2, clockwise);
+      this.turnSideCol(0, clockwise);
+    }
+    this.checkIfSolved();
+  }
   
   public void scramble() {
+    System.out.println("scramble");
     char[] moveSet = {'r', 'u', 'f', 'l', 'd', 'b', 'R', 'U', 'F', 'L', 'D', 'B'};
       char turntype;
       int turnNum = 10 + (int) (Math.random() * 11);
+      System.out.println(turnNum);
       for (int i = 0; i < turnNum; i++) {
-      turntype = moveSet[(int)(Math.random() * moveSet.length)];
+        turntype = moveSet[(int)(Math.random() * moveSet.length)];
         this.turn(turntype);
     }
   }

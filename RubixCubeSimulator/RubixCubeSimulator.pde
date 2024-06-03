@@ -12,7 +12,6 @@ void setup(){
   int[] newCol = {1, 2};
   System.out.println(twoCube.debugToString());
   threeCube.turnSideCol(0, false);
-  drawCube(threeCube, 3, 200, width/2, height/2);
 }
 
 void mouseClicked() {
@@ -24,9 +23,34 @@ void mouseClicked() {
   }
 }
 
+void keyPressed() {
+  if (key == ' ' ){
+    MODE = (MODE + 1) % 2;
+  }
+  if (key == 's'){
+    if (MODE == twoByTwo){
+      twoCube.scramble();
+    }
+    if (MODE == threeByThree){
+      threeCube.scramble();
+    }
+  }
+  if (MODE == twoByTwo) {
+     twoCube.turn((char) key);
+  }
+  if (MODE == threeByThree) {
+    threeCube.turn((char) key);
+  }
+}
+
 void draw(){
   background(211, 211, 211);
-  drawCube(threeCube, 3, 200, width/2, height/2);
+  if (MODE == twoByTwo){
+    drawCube(twoCube, 2, 200, width/2, height/2);
+  }
+  if (MODE == threeByThree){
+    drawCube(threeCube, 3, 200, width/2, height/2);
+  }
 }
 
 void drawFace(RubiksCube cube, int cubeRowLength, int face, float faceSize, float xcoord, float ycoord, int position){
