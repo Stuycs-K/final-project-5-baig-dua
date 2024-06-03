@@ -14,7 +14,7 @@ void setup(){
   System.out.println(twoCube.debugToString());
   twoCube.turnFace(1, false);
   twoCube.turnFace(1, true);
-  drawCube(twoCube, 2, 200, width/2, height/2);
+  drawCube(threeCube, 3, 200, width/2, height/2);
 }
 
 void mouseClicked() {
@@ -28,7 +28,7 @@ void mouseClicked() {
 
 void draw(){
   background(211, 211, 211);
-  drawCube(twoCube, 2, 200, width/2, height/2);
+  drawCube(threeCube, 3, 200, width/2, height/2);
 }
 
 void drawFace(RubiksCube cube, int cubeRowLength, int face, float faceSize, float xcoord, float ycoord, int position){

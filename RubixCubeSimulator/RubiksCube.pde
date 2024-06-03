@@ -8,7 +8,7 @@ abstract class RubiksCube {
   public final int BLUE = color(0, 0, 255);
   public final int YELLOW = color(255, 255, 0);
   public final int ORANGE = color(255, 121, 0);
-  private int[] cubeColors = {WHITE, ORANGE, GREEN, RED, BLUE, YELLOW};
+  private int[] cubeColors = {WHITE, ORANGE, BLUE, RED, GREEN, YELLOW};
 
   //constructor
   public RubiksCube(int size) {
@@ -144,27 +144,23 @@ abstract class RubiksCube {
     }
   }
 
-
+/*
   public void turnCol(int col, boolean clockwise, boolean front){
     int[] tempCol;
     int[] colIndex;
     if (front){
       colIndex = new int[]{0, 2, 5, 4};
-    }
-    else {
-      colIndex = new int[]{0, 1, 5, 3};
-    }
-    if (clockwise){
-      tempCol = getCols(colIndex[colIndex.length - 1], col);
-      for (int i = colIndex.length - 1; i >= 0; i--){
-         if (i - 1 <= 0){
-         
+      if (clockwise){
+        tempCol = this.
+        for (int i = colIndex - 1; i <= 0; i--){
+          if (i - 1 < 0){
+            
+          }
+        }
       }
-    }
-    else {
-    }
   }
-
+  }
+*/
 
   public void turnFace(int face, boolean clockwise){
     int[][] faceCols = new int[cube[face].length][cube[face].length];
