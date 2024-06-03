@@ -11,7 +11,7 @@ void setup(){
   threeCube = new Cube3x3();
   int[] newCol = {1, 2};
   System.out.println(twoCube.debugToString());
-  threeCube.turnFrontCol(0, false);
+  threeCube.turnSideCol(0, false);
   drawCube(threeCube, 3, 200, width/2, height/2);
 }
 

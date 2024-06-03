@@ -176,7 +176,46 @@ abstract class RubiksCube {
       }
     }
   }
-
+  
+  public void turnSideCol(int col, boolean clockwise){
+    int[] tempCol;
+    int[] colIndex = new int[]{1, 0, 3, 5};
+    int swapIndex;
+    if (clockwise){
+      swapIndex = colIndex[0];
+      tempCol = this.getCols(swapIndex, col);
+      for (int i = 0; i < colIndex.length; i++){
+        swapIndex = colIndex[(i+1) % 4];
+        if (swapIndex == 0 || swapIndex == 5){
+          tempCol = this.reverseCol(tempCol);
+          tempCol = this.replaceRow(swapIndex, col, tempCol);
+        }
+        else{
+          tempCol = this.replaceCol(swapIndex, col, tempCol);
+        }
+      }
+    }
+    else{
+      swapIndex = colIndex[colIndex.length - 1];
+      tempCol = this.getRows(swapIndex, col);
+      for (int i = colIndex.length - 1; i >= 0; i--){
+       if (i == 0){
+          swapIndex = colIndex[colIndex.length - 1];
+       }
+       else {
+          swapIndex = colIndex[i - 1];
+       }
+       if (swapIndex == 1 || swapIndex == 3){
+         tempCol = this.reverseCol(tempCol);
+         tempCol = this.replaceCol(swapIndex, col, tempCol);
+       }
+       else {
+         tempCol = this.replaceRow(swapIndex, col, tempCol);
+       }
+      }
+    }
+  }
+  
   public void turnFace(int face, boolean clockwise){
     int[][] faceCols = new int[cube[face].length][cube[face].length];
     if (clockwise){
