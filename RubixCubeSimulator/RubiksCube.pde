@@ -79,9 +79,8 @@ abstract class RubiksCube {
     return ogCol;
   }
   
-  private int[] reverseCol(int face, int col){
-    int[] reverseArr = new int [cube[face].length];
-    int[] currCol = this.getCols(face, col);
+  private int[] reverseCol(int[] currCol){
+    int[] reverseArr = new int [cube[0].length];
     for (int i = 0; i < currCol.length; i++){
       reverseArr[i] = currCol[(currCol.length - 1) - i];
     }
@@ -144,29 +143,45 @@ abstract class RubiksCube {
     }
   }
 
-/*
-  public void turnCol(int col, boolean clockwise, boolean front){
+
+  public void turnFrontCol(int col, boolean clockwise){
     int[] tempCol;
-    int[] colIndex;
-    if (front){
-      colIndex = new int[]{0, 2, 5, 4};
-      if (clockwise){
-        tempCol = this.
-        for (int i = colIndex - 1; i <= 0; i--){
-          if (i - 1 < 0){
-            
-          }
+    int[] colIndex = new int[]{2, 0, 4, 5};
+    int swapIndex;
+    if (clockwise){
+      swapIndex = colIndex[0];
+      tempCol = this.getCols(swapIndex, col);
+      for (int i = 0; i < colIndex.length; i++){
+          swapIndex = colIndex[(i+1) % 4];
+        if (swapIndex == 0 || swapIndex == 5){
+          tempCol = this.reverseCol(tempCol);
         }
+        tempCol = this.replaceCol(swapIndex, col, tempCol);
       }
+    }
+    else{
+      swapIndex = colIndex[colIndex.length - 1];
+      tempCol = this.getCols(swapIndex, col);
+      for (int i = colIndex.length - 1; i >= 0; i--){
+        if (i == 0){
+          swapIndex = colIndex[colIndex.length - 1];
+        }
+        else {
+          swapIndex = colIndex[i - 1];
+        }
+        if (swapIndex == 2 || swapIndex == 4){
+          tempCol = this.reverseCol(tempCol);
+        }
+        tempCol = this.replaceCol(swapIndex, col, tempCol);
+      }
+    }
   }
-  }
-*/
 
   public void turnFace(int face, boolean clockwise){
     int[][] faceCols = new int[cube[face].length][cube[face].length];
     if (clockwise){
       for (int i = 0; i < cube[face].length; i++){
-        faceCols[i] = this.reverseCol(face, i);
+        faceCols[i] = this.reverseCol(this.getCols(face, i));
       }
       for (int i = 0; i < faceCols.length; i++){
         this.replaceRow(face, i, faceCols[i]);
