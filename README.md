@@ -6,7 +6,9 @@ A 2D Rubiks Cube simulator. The user can press keys to turn the rows, columns, a
 
 ## Instructions
 Mouse Click - resets cube
+<br/> 
 Space Bar - switches modes from the 2x2 cube to the 3x3 cube
+<br/> 
 'S' key - scrambles cube
 
 Turns:
