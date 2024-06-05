@@ -1,4 +1,5 @@
 import java.util.*; 
+import java.util.concurrent.TimeUnit; 
 abstract class RubiksCube {
   private int[][][] cube;
   private boolean solved;
@@ -126,7 +127,7 @@ abstract class RubiksCube {
         if (swapIndex >= cube.length - 1){
           swapIndex = 1;
         }
-        if (swapIndex == 4 || swapIndex == 2) {
+        if (swapIndex == 2 || swapIndex == 4) {
           tempRow = this.reverseCol(tempRow);
         }
         tempRow = replaceRow(swapIndex, row, tempRow);
@@ -159,10 +160,10 @@ abstract class RubiksCube {
       tempCol = this.getCols(swapIndex, col);
       for (int i = 0; i < colIndex.length; i++){
           swapIndex = colIndex[(i+1) % 4];
-        if (swapIndex == 2 || swapIndex == 4){
+        tempCol = this.replaceCol(swapIndex, col, tempCol);
+        if (swapIndex == 0 || swapIndex == 5){
           tempCol = this.reverseCol(tempCol);
         }
-        tempCol = this.replaceCol(swapIndex, col, tempCol);
       }
     }
     else{
@@ -244,7 +245,6 @@ abstract class RubiksCube {
   
   public void turn(char input){
     boolean clockwise;
-    System.out.println("turn");
     if (input > 'Z'){
       clockwise = true;
     }
@@ -253,11 +253,11 @@ abstract class RubiksCube {
     }
     if (input == 'r' || input == 'R'){
       this.turnFrontCol(cube[0].length - 1, clockwise);
-      this.turnFace(3, clockwise);
+      this.turnFace(3, !clockwise);
     }
     else if (input == 'l' || input == 'L'){
       this.turnFrontCol(0, clockwise);
-      this.turnFace(1, clockwise);
+      this.turnFace(1, !clockwise);
     }
     else if (input == 'u' || input == 'U'){
       this.turnRow(0, clockwise);
@@ -276,17 +276,18 @@ abstract class RubiksCube {
       this.turnSideCol(0, clockwise);
     }
     this.checkIfSolved();
+
   }
   
   public void scramble() {
     System.out.println("scramble");
-    char[] moveSet = {'r', 'u', 'f', 'l', 'd', 'b', 'R', 'U', 'F', 'L', 'D', 'B'};
+    char[] moveSet = {'r' ,'u', 'l', 'd', 'f', 'b', 'R', 'L', 'U', 'D', 'F', 'B'};
       char turntype;
       int turnNum = 10 + (int) (Math.random() * 11);
-      System.out.println(turnNum);
       for (int i = 0; i < turnNum; i++) {
-        turntype = moveSet[(int)(Math.random() * moveSet.length)];
-        this.turn(turntype);
+          turntype = moveSet[(int)(Math.random() * moveSet.length)];
+          System.out.println(turntype);
+          this.turn(turntype);
     }
   }
 }
