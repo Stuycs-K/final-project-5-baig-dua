@@ -27,4 +27,5 @@
 ### 5/31/2024 - 6/2/2024
 - Completed methods for turning the side and front columns. Also wrote overarching turnmethod and added keyPressed for input.
 
-info
+### 6/3/2024 - 6/4/2024
+- Fixed bugs in turn methods (some faces were reversing when they shouldn't be), starting on solve.
