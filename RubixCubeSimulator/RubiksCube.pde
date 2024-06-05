@@ -1,4 +1,5 @@
 import java.util.*; 
+import java.util.concurrent.TimeUnit; 
 abstract class RubiksCube {
   private int[][][] cube;
   private boolean solved;
@@ -244,7 +245,6 @@ abstract class RubiksCube {
   
   public void turn(char input){
     boolean clockwise;
-    System.out.println("turn");
     if (input > 'Z'){
       clockwise = true;
     }
@@ -280,13 +280,13 @@ abstract class RubiksCube {
   
   public void scramble() {
     System.out.println("scramble");
-    char[] moveSet = {'r', 'u', 'f', 'l', 'd', 'b', 'R', 'U', 'F', 'L', 'D', 'B'};
+    char[] moveSet = {'b', 'u', 'f', 'd', 'F', 'U', 'B', 'D'};
       char turntype;
       int turnNum = 10 + (int) (Math.random() * 11);
-      System.out.println(turnNum);
       for (int i = 0; i < turnNum; i++) {
-        turntype = moveSet[(int)(Math.random() * moveSet.length)];
-        this.turn(turntype);
+          turntype = moveSet[(int)(Math.random() * moveSet.length)];
+          System.out.println(turntype);
+          this.turn(turntype);
     }
   }
 }
