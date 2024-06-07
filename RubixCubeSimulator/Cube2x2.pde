@@ -4,4 +4,5 @@ public class Cube2x2 extends RubiksCube{
     super(2);
   }
   
+  public void solve(){}
 }
