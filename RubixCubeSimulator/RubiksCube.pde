@@ -250,27 +250,27 @@ abstract class RubiksCube {
     else{
       clockwise = false;
     }
-    if (input == 'r' || input == 'R'){
+    if (Character.toLowerCase(input) == 'r'){
       this.turnFrontCol(cube[0].length - 1, clockwise);
       this.turnFace(3, !clockwise);
     }
-    else if (input == 'l' || input == 'L'){
+    else if (Character.toLowerCase(input) == 'l'){
       this.turnFrontCol(0, clockwise);
       this.turnFace(1, !clockwise);
     }
-    else if (input == 'u' || input == 'U'){
+    else if (Character.toLowerCase(input) == 'u'){
       this.turnRow(0, clockwise);
       this.turnFace(0, clockwise);
     }
-    else if (input == 'd' || input == 'D'){
+    else if (Character.toLowerCase(input) == 'd'){
       this.turnRow(cube[0].length - 1, clockwise);
       this.turnFace(5, clockwise);
     }
-    else if (input == 'f' || input == 'F'){
+    else if (Character.toLowerCase(input) == 'f'){
       this.turnFace(4, clockwise);
       this.turnSideCol(cube[0].length - 1, clockwise);
     }
-    else if (input == 'b' || input == 'B'){
+    else if (Character.toLowerCase(input) == 'b'){
       this.turnFace(2, clockwise);
       this.turnSideCol(0, clockwise);
     }
