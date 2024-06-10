@@ -46,9 +46,9 @@ void keyPressed() {
 void draw(){
   background(211, 211, 211);
   if (MODE == twoByTwo){
-    twoCube.drawCube(200, width/2, height/2);
+    twoCube.drawCube(200, width/2, height/2, 5);
   }
   if (MODE == threeByThree){
-    threeCube.drawCube(200, width/2, height/2);
+    threeCube.drawCube(200, width/2, height/2, 5);
   }
 }

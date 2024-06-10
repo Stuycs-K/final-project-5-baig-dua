@@ -255,24 +255,24 @@ abstract class RubiksCube {
       this.turnFace(3, !clockwise);
     }
     else if (Character.toLowerCase(input) == 'l'){
-      this.turnFrontCol(0, clockwise);
-      this.turnFace(1, !clockwise);
+      this.turnFrontCol(0, !clockwise);
+      this.turnFace(1, clockwise);
     }
     else if (Character.toLowerCase(input) == 'u'){
       this.turnRow(0, clockwise);
       this.turnFace(0, clockwise);
     }
     else if (Character.toLowerCase(input) == 'd'){
-      this.turnRow(cube[0].length - 1, clockwise);
-      this.turnFace(5, clockwise);
+      this.turnRow(cube[0].length - 1, !clockwise);
+      this.turnFace(5, !clockwise);
     }
     else if (Character.toLowerCase(input) == 'f'){
       this.turnFace(4, clockwise);
       this.turnSideCol(cube[0].length - 1, clockwise);
     }
     else if (Character.toLowerCase(input) == 'b'){
-      this.turnFace(2, clockwise);
-      this.turnSideCol(0, clockwise);
+      this.turnFace(2, !clockwise);
+      this.turnSideCol(0, !clockwise);
     }
     this.checkIfSolved();
 
@@ -317,15 +317,17 @@ abstract class RubiksCube {
     }
   }
   
-  public void drawCube(float faceSize, float xcoord, float ycoord){
+  public void drawCube(float faceSize, float xcoord, float ycoord, float border){
     xcoord -= faceSize;
     ycoord -= faceSize/2;
-    this.drawFace(0, faceSize, xcoord, ycoord, 0);
-    this.drawFace(1, faceSize, xcoord  - faceSize/cube[1].length, ycoord, 1);
-    this.drawFace(2, faceSize, xcoord, ycoord - faceSize/cube[2].length, 2);
-    this.drawFace(3, faceSize, xcoord + faceSize, ycoord, 3);
-    this.drawFace(4, faceSize, xcoord, ycoord + faceSize, 0);
-    this.drawFace(5, faceSize, xcoord + (faceSize * 2) - faceSize/cube[5].length, ycoord, 4);
+    float[][] coords = {{0, 0}, {(-faceSize/cube[1].length - border), 0}, {0, -faceSize/cube[2].length - border}, {faceSize + border, 0}, {0, faceSize + border}, {faceSize * 2 - faceSize/cube[5].length + border * 2, 0}};
+    float[][] borderpos = {{-border, -border}, {-faceSize - border * 2, - border}, {-border, - faceSize - border * 2}, {faceSize, - border}, {- border, faceSize}, {faceSize * 2 + border, -border}};
+    int[] positions = {0, 1, 2, 3, 0, 4};
+    for (int i = 0; i < 6; i++){
+    fill(0);
+    square(xcoord + borderpos[i][0], ycoord + borderpos[i][1], faceSize + border*2);
+      this.drawFace(i, faceSize, xcoord + coords[i][0], ycoord + coords[i][1], positions[i]);
+    }
   }
   
   public abstract void solve();
