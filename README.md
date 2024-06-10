@@ -28,7 +28,7 @@ Turns:
 Capital letters turn their respective cube parts clockwise, while lowercase letters turn said parts counterclockwise.
 
 ## Demo Video
-https://drive.google.com/file/d/1277yT5rkchcsqx7p2EiSdmQoENbnOiUO/view?usp=sharing
+[https://drive.google.com/file/d/1277yT5rkchcsqx7p2EiSdmQoENbnOiUO/view?usp=sharing](https://drive.google.com/file/d/1yHHlehd04hvgaRBcdZvjY-gLAC4zrrgT/view?usp=sharing)
 
 ## Possible Bugs
 I'm pretty sure the scrambles for both cubes work (Moreso for the 3x3 than the 2x2, as I actually mimicked the moves on a real 3x3). However, I can't reasonably test every combination of moves out there, so I don't know if there's some hyper-specific scenario that will break it and give the user an unsolvable cube. 
