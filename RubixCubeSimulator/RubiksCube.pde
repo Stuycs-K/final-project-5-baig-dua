@@ -9,7 +9,7 @@ abstract class RubiksCube {
   public final int BLUE = color(0, 0, 255);
   public final int YELLOW = color(255, 255, 0);
   public final int ORANGE = color(255, 121, 0);
-  private int[] cubeColors = {WHITE, ORANGE, BLUE, RED, GREEN, YELLOW};
+  public int[] cubeColors = {WHITE, ORANGE, BLUE, RED, GREEN, YELLOW};
 
   //constructor
   public RubiksCube(int size) {
@@ -23,6 +23,7 @@ abstract class RubiksCube {
       }
     }
     lastTenMoves = new LastMovesList(10);
+    boolean timer = false;
   }
 
   public int[][] getFace(int face) {
@@ -293,7 +294,6 @@ abstract class RubiksCube {
     || Character.toLowerCase(input) == 'd' || Character.toLowerCase(input) == 'f' || Character.toLowerCase(input) == 'b';
   }
   public void scramble() {
-    System.out.println("scramble");
     char[] moveSet = {'r' ,'u', 'l', 'd', 'f', 'b', 'R', 'L', 'U', 'D', 'F', 'B'};
       char turntype;
       int turnNum = 10 + (int) (Math.random() * 11);

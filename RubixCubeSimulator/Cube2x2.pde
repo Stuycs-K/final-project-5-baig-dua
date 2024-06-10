@@ -1,3 +1,4 @@
+import java.util.*; 
 public class Cube2x2 extends RubiksCube{
   
   public Cube2x2(){
@@ -59,5 +60,38 @@ public class Cube2x2 extends RubiksCube{
       }
     }
     return corner;
-}
+  }
+
+    private boolean correctPos(int[][] corner){
+      boolean pos = true;
+      int[] faces = new int[corner.length];
+      int[] colors = new int[corner.length];
+      int[] ogColor = new int[corner.length];
+      for (int i = 0; i < corner.length; i++){
+        faces[i] = corner[i][0];
+        colors[i] = corner[i][1];
+        ogColor[i] = cubeColors[faces[i]];
+      }
+      Arrays.sort(colors);
+      Arrays.sort(ogColor);
+      for (int i = 0; i < colors.length; i++){
+        if (colors[i] != ogColor[i]){
+          pos = false;
+        }
+      }
+      return pos;
+  }
+  
+  private boolean correctOrientation(int[][] corner){
+    boolean orient = true;
+    int face = 0;
+    for (int i = 0; i < corner.length; i++){
+      face = corner[i][0];
+      if (cubeColors[face] != corner[i][1]){
+        orient = false;
+      }
+    }
+    return orient;
+  }
+  
 }

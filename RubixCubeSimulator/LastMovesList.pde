@@ -15,7 +15,6 @@ public class LastMovesList{
         lastMoves.remove(0);
       }
       lastMoves.add(input);
-      System.out.println(lastMoves.toString());
     }
     
     public void clear(){
