@@ -36,10 +36,10 @@ void keyPressed() {
     }
   }
   if (MODE == twoByTwo) {
-     twoCube.turn((char) key);
+     twoCube.turn((char) key, true);
   }
   if (MODE == threeByThree) {
-    threeCube.turn((char) key);
+    threeCube.turn((char) key, true);
   }
 }
 

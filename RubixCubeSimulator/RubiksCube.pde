@@ -2,6 +2,7 @@ import java.util.*;
 abstract class RubiksCube {
   private int[][][] cube;
   private boolean solved;
+  private LastMovesList lastTenMoves;
   public final int RED = color(255, 0, 0);
   public final int GREEN = color(0, 255, 0);
   public final int WHITE = color(255, 255, 255);
@@ -21,6 +22,7 @@ abstract class RubiksCube {
         }
       }
     }
+    lastTenMoves = new LastMovesList(10);
   }
 
   public int[][] getFace(int face) {
@@ -112,6 +114,7 @@ abstract class RubiksCube {
         }
       }
     }
+    lastTenMoves.clear();
   }
   
   
@@ -143,7 +146,6 @@ abstract class RubiksCube {
         if (swapIndex == 1 || swapIndex == 3) {
           tempRow = this.reverseCol(tempRow);
         }
-        System.out.println(Arrays.toString(tempRow));
         tempRow = replaceRow(swapIndex, row, tempRow);
       }
     }
@@ -242,13 +244,21 @@ abstract class RubiksCube {
    }
   }
   
-  public void turn(char input){
+  public void turn(char input, boolean addToList){
     boolean clockwise;
+    String turn = ""; 
     if (input > 'Z'){
       clockwise = true;
     }
     else{
       clockwise = false;
+    }
+    if (addToList && this.validInput(input)){
+      turn += Character.toUpperCase(input);
+      if (!clockwise){
+        turn += "\'";
+      }
+      lastTenMoves.add(turn);
     }
     if (Character.toLowerCase(input) == 'r'){
       this.turnFrontCol(cube[0].length - 1, clockwise);
@@ -278,6 +288,10 @@ abstract class RubiksCube {
 
   }
   
+  private boolean validInput(char input){
+    return Character.toLowerCase(input) == 'r' || Character.toLowerCase(input) == 'l' || Character.toLowerCase(input) == 'u' 
+    || Character.toLowerCase(input) == 'd' || Character.toLowerCase(input) == 'f' || Character.toLowerCase(input) == 'b';
+  }
   public void scramble() {
     System.out.println("scramble");
     char[] moveSet = {'r' ,'u', 'l', 'd', 'f', 'b', 'R', 'L', 'U', 'D', 'F', 'B'};
@@ -286,7 +300,7 @@ abstract class RubiksCube {
       for (int i = 0; i < turnNum; i++) {
           turntype = moveSet[(int)(Math.random() * moveSet.length)];
           System.out.println(turntype);
-          this.turn(turntype);
+          this.turn(turntype, false);
     }
   }
   
@@ -324,10 +338,11 @@ abstract class RubiksCube {
     float[][] borderpos = {{-border, -border}, {-faceSize - border * 2, - border}, {-border, - faceSize - border * 2}, {faceSize, - border}, {- border, faceSize}, {faceSize * 2 + border, -border}};
     int[] positions = {0, 1, 2, 3, 0, 4};
     for (int i = 0; i < 6; i++){
-    fill(0);
-    square(xcoord + borderpos[i][0], ycoord + borderpos[i][1], faceSize + border*2);
+      fill(0);
+      square(xcoord + borderpos[i][0], ycoord + borderpos[i][1], faceSize + border * 2);
       this.drawFace(i, faceSize, xcoord + coords[i][0], ycoord + coords[i][1], positions[i]);
     }
+    lastTenMoves.showList(width - 420, height - 220, 400, 200, 30, 20, 20);
   }
   
   public abstract void solve();
