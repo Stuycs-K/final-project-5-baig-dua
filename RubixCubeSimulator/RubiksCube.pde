@@ -3,13 +3,14 @@ import java.util.concurrent.TimeUnit;
 abstract class RubiksCube {
   private int[][][] cube;
   private boolean solved;
+  private LastMovesList lastTenMoves;
   public final int RED = color(255, 0, 0);
   public final int GREEN = color(0, 255, 0);
   public final int WHITE = color(255, 255, 255);
   public final int BLUE = color(0, 0, 255);
   public final int YELLOW = color(255, 255, 0);
   public final int ORANGE = color(255, 121, 0);
-  private int[] cubeColors = {WHITE, ORANGE, BLUE, RED, GREEN, YELLOW};
+  public int[] cubeColors = {WHITE, ORANGE, BLUE, RED, GREEN, YELLOW};
 
   //constructor
   public RubiksCube(int size) {
@@ -22,6 +23,8 @@ abstract class RubiksCube {
         }
       }
     }
+    lastTenMoves = new LastMovesList(10);
+    boolean timer = false;
   }
 
   public int[][] getFace(int face) {
@@ -113,6 +116,7 @@ abstract class RubiksCube {
         }
       }
     }
+    lastTenMoves.clear();
   }
   
   
@@ -135,7 +139,7 @@ abstract class RubiksCube {
     }
     else {
       swapIndex = 4;
-      tempRow = getRows(4, 0);
+      tempRow = getRows(4, row);
       for (int i = 4; i > 0; i--){
         swapIndex--;
         if (swapIndex <= 0){
@@ -144,7 +148,6 @@ abstract class RubiksCube {
         if (swapIndex == 1 || swapIndex == 3) {
           tempRow = this.reverseCol(tempRow);
         }
-        //System.out.println(Arrays.toString(tempRow));
         tempRow = replaceRow(swapIndex, row, tempRow);
       }
     }
@@ -243,50 +246,104 @@ abstract class RubiksCube {
    }
   }
   
-  public void turn(char input){
+  public void turn(char input, boolean addToList){
     boolean clockwise;
+    String turn = ""; 
     if (input > 'Z'){
       clockwise = true;
     }
     else{
       clockwise = false;
     }
-    if (input == 'r' || input == 'R'){
+    if (addToList && this.validInput(input)){
+      turn += Character.toUpperCase(input);
+      if (!clockwise){
+        turn += "\'";
+      }
+      lastTenMoves.add(turn);
+    }
+    if (Character.toLowerCase(input) == 'r'){
       this.turnFrontCol(cube[0].length - 1, clockwise);
       this.turnFace(3, !clockwise);
     }
-    else if (input == 'l' || input == 'L'){
-      this.turnFrontCol(0, clockwise);
-      this.turnFace(1, !clockwise);
+    else if (Character.toLowerCase(input) == 'l'){
+      this.turnFrontCol(0, !clockwise);
+      this.turnFace(1, clockwise);
     }
-    else if (input == 'u' || input == 'U'){
+    else if (Character.toLowerCase(input) == 'u'){
       this.turnRow(0, clockwise);
       this.turnFace(0, clockwise);
     }
-    else if (input == 'd' || input == 'D'){
-      this.turnRow(cube[0].length - 1, clockwise);
-      this.turnFace(5, clockwise);
+    else if (Character.toLowerCase(input) == 'd'){
+      this.turnRow(cube[0].length - 1, !clockwise);
+      this.turnFace(5, !clockwise);
     }
-    else if (input == 'f' || input == 'F'){
+    else if (Character.toLowerCase(input) == 'f'){
       this.turnFace(4, clockwise);
       this.turnSideCol(cube[0].length - 1, clockwise);
     }
-    else if (input == 'b' || input == 'B'){
-      this.turnFace(2, clockwise);
-      this.turnSideCol(0, clockwise);
+    else if (Character.toLowerCase(input) == 'b'){
+      this.turnFace(2, !clockwise);
+      this.turnSideCol(0, !clockwise);
     }
     this.checkIfSolved();
+
   }
   
+  private boolean validInput(char input){
+    return Character.toLowerCase(input) == 'r' || Character.toLowerCase(input) == 'l' || Character.toLowerCase(input) == 'u' 
+    || Character.toLowerCase(input) == 'd' || Character.toLowerCase(input) == 'f' || Character.toLowerCase(input) == 'b';
+  }
   public void scramble() {
-    System.out.println("scramble");
-    char[] moveSet = {'b', 'u', 'f', 'd', 'F', 'U', 'B', 'D'};
+    char[] moveSet = {'r' ,'u', 'l', 'd', 'f', 'b', 'R', 'L', 'U', 'D', 'F', 'B'};
       char turntype;
       int turnNum = 10 + (int) (Math.random() * 11);
       for (int i = 0; i < turnNum; i++) {
           turntype = moveSet[(int)(Math.random() * moveSet.length)];
-          System.out.println(turntype);
-          this.turn(turntype);
+          this.turn(turntype, false);
     }
   }
+  
+  private void drawFace(int face, float faceSize, float xcoord, float ycoord, int position){
+    float squareLength = faceSize/cube[face].length;
+    if (position == 4){
+      xcoord += faceSize;
+    }
+    for (int row = 0; row < cube[face].length; row++){
+      for(int col = 0; col < cube[face].length; col++){
+        fill(cube[face][row][col]);
+        if (position == 0){
+          square(xcoord + (squareLength * col), ycoord + (row * squareLength), squareLength);
+        }
+        else if (position == 1){
+          square(xcoord - (squareLength * row), ycoord + (col * squareLength), squareLength);
+        }
+        else if (position == 2){
+          square(xcoord + (squareLength * col), ycoord - (row * squareLength), squareLength);
+        }
+        else if (position == 3){
+          square(xcoord + (squareLength * row), ycoord + (col * squareLength), squareLength);
+        }
+        else if (position == 4){
+          square(xcoord - (squareLength * col), ycoord + (row * squareLength), squareLength);
+        }
+      }
+    }
+  }
+  
+  public void drawCube(float faceSize, float xcoord, float ycoord, float border){
+    xcoord -= faceSize;
+    ycoord -= faceSize/2;
+    float[][] coords = {{0, 0}, {(-faceSize/cube[1].length - border), 0}, {0, -faceSize/cube[2].length - border}, {faceSize + border, 0}, {0, faceSize + border}, {faceSize * 2 - faceSize/cube[5].length + border * 2, 0}};
+    float[][] borderpos = {{-border, -border}, {-faceSize - border * 2, - border}, {-border, - faceSize - border * 2}, {faceSize, - border}, {- border, faceSize}, {faceSize * 2 + border, -border}};
+    int[] positions = {0, 1, 2, 3, 0, 4};
+    for (int i = 0; i < 6; i++){
+      fill(0);
+      square(xcoord + borderpos[i][0], ycoord + borderpos[i][1], faceSize + border * 2);
+      this.drawFace(i, faceSize, xcoord + coords[i][0], ycoord + coords[i][1], positions[i]);
+    }
+    lastTenMoves.showList(width - 420, height - 220, 400, 200, 30, 20, 20);
+  }
+  
+  public abstract void solve();
 }

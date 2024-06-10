@@ -29,3 +29,12 @@
 
 ### 6/3/2024 - 6/4/2024
 - Fixed bugs in turn methods (some faces were reversing when they shouldn't be), starting on solve.
+
+### 6/5/2024 - 6/7/2024
+- Attempted to implement solve for 2x2. No commits because it wasn't working the way I wanted it to (screwed up the cube itself), so I kept rewriting the function. I found out on Friday it wasn't working right because I put a wrong value within the row movement function, so the cube just all started turning one color when I would try to turn the bottom face counterclockwise multiple times.
+
+## 6/8/2024
+- Added history of movements list to simulator (lack of commits due to spending the day at a wedding).
+
+## 6/9/2024
+- Made history of movements visible to the viewer (made the box that displays "last 10 moves")
