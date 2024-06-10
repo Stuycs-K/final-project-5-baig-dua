@@ -2,7 +2,7 @@
 # APCS2 Final Project
 ## Group Info: Currently Cubing - Dua Baig
 ## Overview
-This is a 2D Rubiks Cube simulator. The user can press keys to turn the rows, columns, and faces of the cube.
+  This is a 2D Rubiks Cube simulator. The cube is drawn like an unfolded box, with the center face being the upper face, and the face hanging off the edge being the bottom face. In this simulation, the user can press keys to turn the rows, columns, and faces of the cube. Pressing lowercase keys will turn the respective face clockwise (clockwise as if it were facing the viewer), and pressing uppercase keys will turn the respective face counterclockwise.
 
 ## Instructions
 Mouse Click - resets cube
@@ -28,4 +28,4 @@ Turns:
 Capital letters turn their respective cube parts clockwise, while lowercase letters turn said parts counterclockwise.
 
 ## Demo Video
-https://drive.google.com/file/d/1277yT5rkchcsqx7p2EiSdmQoENbnOiUO/view?usp=sharing
+[https://drive.google.com/file/d/1277yT5rkchcsqx7p2EiSdmQoENbnOiUO/view?usp=sharing](https://drive.google.com/file/d/1yHHlehd04hvgaRBcdZvjY-gLAC4zrrgT/view?usp=sharing)
