@@ -35,3 +35,6 @@
 
 ## 6/8/2024
 - Added history of movements list to simulator (lack of commits due to spending the day at a wedding).
+
+## 6/9/2024
+- Made history of movements visible to the viewer (made the box that displays "last 10 moves")
