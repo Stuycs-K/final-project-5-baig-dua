@@ -299,7 +299,6 @@ abstract class RubiksCube {
       int turnNum = 10 + (int) (Math.random() * 11);
       for (int i = 0; i < turnNum; i++) {
           turntype = moveSet[(int)(Math.random() * moveSet.length)];
-          System.out.println(turntype);
           this.turn(turntype, false);
     }
   }
