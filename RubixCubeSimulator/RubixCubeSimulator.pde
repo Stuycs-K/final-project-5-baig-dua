@@ -9,9 +9,6 @@ void setup(){
   size(1200, 900);
   twoCube = new Cube2x2();
   threeCube = new Cube3x3();
-  int[] newCol = {1, 2};
-  System.out.println(twoCube.debugToString());
-  threeCube.turnSideCol(0, false);
 }
 
 void mouseClicked() {
